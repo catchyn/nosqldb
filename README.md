@@ -8,3 +8,4 @@ Online course about NoSQL DB. Theory and practice.
 - [[4. Coach DB base](./homework/4.%20CoachDB/hw.md)]
 - [[5. Cassandra](./homework/5.%20Cassandra/hw.md)]
 - [[6. ClickHouse part 1](./homework/6%20ClickHouse/hw.md)]
+- [[7. ClickHouse part 2](./homework/7%20ClickHouse%20part%202/hw.md)]

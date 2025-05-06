@@ -9,3 +9,4 @@ Online course about NoSQL DB. Theory and practice.
 - [[5. Cassandra](./homework/5.%20Cassandra/hw.md)]
 - [[6. ClickHouse part 1](./homework/6%20ClickHouse/hw.md)]
 - [[7. ClickHouse part 2](./homework/7%20ClickHouse%20part%202/hw.md)]
+- [[8. Redis](./homework/8.%20Redis/hw.md)]

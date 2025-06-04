@@ -1,0 +1,301 @@
+{
+	"info": {
+		"_postman_id": "d3b6f4c9-30ac-4c7e-a5f9-1d8d729d2862",
+		"name": "ELASTIC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24610281"
+	},
+	"item": [
+		{
+			"name": "postShopItem",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Агдам\",\r\n    \"sku\": \"342-001\",\r\n    \"category\": \"Портвейн\",\r\n    \"price\": 150,\r\n    \"volume\": 0.7,\r\n    \"stock\": [\r\n        {\r\n            \"shop\": \"Мира\",\r\n            \"stock\": 30\r\n        },\r\n        {\r\n            \"shop\": \"Ленина\",\r\n            \"stock\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/otus/_doc",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"otus",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getIndex",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9200/otus-test",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"otus-test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteIndex",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:9200/otus-test",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"otus-test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "putIndex",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"mappings\": {\r\n    \"dynamic\": \"strict\",\r\n    \"properties\": {\r\n      \"text\": {\r\n        \"type\": \"keyword\"\r\n      }\r\n    }\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/otus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"otus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postText",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"text\": \"мама мыла раму\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/otus-test/_doc/1",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"otus-test",
+						"_doc",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAll",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": {\r\n    \"match_all\": {}\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/otus-test/_search",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"otus-test",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteTextById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/otus/_doc/nIeIPJcBYbpWQoMxubxv",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"otus",
+						"_doc",
+						"nIeIPJcBYbpWQoMxubxv"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "putTempate",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"index_patterns\": [\"otus-*\"],\r\n  \"template\": {\r\n    \"settings\": {\r\n        \"analysis\": {\r\n            \"filter\": {\r\n                \"ru_stop\": {\r\n                    \"type\": \"stop\",\r\n                    \"stopwords\": \"_russian_\"\r\n                },\r\n                \"ru_stemmer\": {\r\n                    \"type\": \"stemmer\",\r\n                    \"language\": \"russian\"\r\n                }\r\n            },\r\n            \"analyzer\": {\r\n                \"my_russian\": {\r\n                    \"tokenizer\": \"standard\",\r\n                    \"filter\": [\r\n                        \"lowercase\",\r\n                        \"ru_stop\",\r\n                        \"ru_stemmer\"\r\n                    ]\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"mappings\": {\r\n      \"dynamic\": \"strict\",\r\n      \"properties\": {\r\n        \"text\": {\r\n          \"type\": \"text\",\r\n          \"analyzer\": \"my_russian\"\r\n        }\r\n      }\r\n    }\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "localhost:9200/_index_template/otus_template",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_index_template",
+						"otus_template"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "putIndexByTemplate",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:9200/otus-test",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"otus-test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteTemplateByName",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:9200/_index_template/otus_template\n",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_index_template",
+						"otus_template\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSearch",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": {\r\n    \"match\": {\r\n      \"text\": {\r\n        \"query\": \"мама ела сосиски\",\r\n        \"fuzziness\": 1\r\n      }\r\n    }\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/otus-test/_search",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"otus-test",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
